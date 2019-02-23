@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var score = 0
     var correctAnswer = 0
     var questionsAnswered = 0
+    let maxQuestions = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class ViewController: UIViewController {
         button2.layer.borderColor = UIColor.lightGray.cgColor
         button3.layer.borderColor = UIColor.lightGray.cgColor
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(showScore))
         askQuestion(action: nil)
 
     }
@@ -66,11 +68,29 @@ class ViewController: UIViewController {
     
     func alert(title: String) {
         
-        if questionsAnswered < 10 {
+        if questionsAnswered < maxQuestions {
             let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
             present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Game Over", message: "Your final score is \(score)", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: askQuestion))
+            present(ac, animated: true, completion: nil)
+            score = 0
+            questionsAnswered = 0
         }
         
     }
+    
+    @objc func showScore() {
+        
+        let ac = UIAlertController(title: "Your score is \(score)!", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+        present(ac, animated: true)
+    }
+    
 }
+
+// 1. Try adding the image name to the list of items that are shared. The activityItems parameter is an array, so you can add strings and other things freely. Note: Facebook won’t let you share text, but most other share options will.
+// 2. Go back to project 1 and add a bar button item to the main view controller that recommends the app to other people.
+// 3. Go back to project 2 and add a bar button item that shows their score when tapped.
