@@ -25,6 +25,7 @@
 		1F8A697A2221F0270091075F /* france@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8A69562221F0270091075F /* france@3x.png */; };
 		1F8A697C2221F0270091075F /* spain@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8A69582221F0270091075F /* spain@3x.png */; };
 		1F8A697D2221F0270091075F /* uk@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8A69592221F0270091075F /* uk@3x.png */; };
+		1F9DE1F8222330B80093382C /* FlagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DE1F7222330B80093382C /* FlagTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		1F8A69562221F0270091075F /* france@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "france@3x.png"; sourceTree = "<group>"; };
 		1F8A69582221F0270091075F /* spain@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spain@3x.png"; sourceTree = "<group>"; };
 		1F8A69592221F0270091075F /* uk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uk@3x.png"; sourceTree = "<group>"; };
+		1F9DE1F7222330B80093382C /* FlagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		1F8A690B2221EB0B0091075F /* Milestone1 */ = {
 			isa = PBXGroup;
 			children = (
+				1F9DE1F7222330B80093382C /* FlagTableViewCell.swift */,
 				1F8A69202221EB3C0091075F /* DetailViewController.swift */,
 				1F8A691E2221EB260091075F /* FlagViewController.swift */,
 				1F8A69102221EB0B0091075F /* Main.storyboard */,
@@ -197,6 +200,7 @@
 				1F8A69212221EB3C0091075F /* DetailViewController.swift in Sources */,
 				1F8A691F2221EB260091075F /* FlagViewController.swift in Sources */,
 				1F8A690D2221EB0B0091075F /* AppDelegate.swift in Sources */,
+				1F9DE1F8222330B80093382C /* FlagTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
