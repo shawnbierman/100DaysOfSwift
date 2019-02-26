@@ -93,20 +93,15 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     decisionHandler(.allow)
                     print("Found \(host) in \(websites). Allowing...")
                     return
-                } else {
-                    print("Did not find \(host) in \(websites). Cancelling...")
-                    
-                    let message = "\(host) has not been whitelisted."
-                    
-                    let ac = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-                    present(ac, animated: true)
-                    
-                    decisionHandler(.cancel)
-                    return
                 }
             }
         }
+        
+        let message = "Website has not been whitelisted."
+        
+        let ac = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+        present(ac, animated: true)
         
         decisionHandler(.cancel)
     }
