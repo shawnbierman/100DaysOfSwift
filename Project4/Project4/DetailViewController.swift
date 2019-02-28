@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DetailViewController.swift
 //  Project4
 //
 //  Created by Shawn Bierman on 2/24/19.
@@ -9,11 +9,12 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class DetailViewController: UIViewController, WKNavigationDelegate {
 
     var webView: WKWebView!
     var progressView: UIProgressView!
-    var websites = ["apple.com", "hackingwithswift.com"]
+    var websites = ["apple.com", "hackingwithswift.com", "google.com"]
+    var selectedWebsite: String?
     
     override func loadView() {
         webView = WKWebView()
@@ -40,19 +41,20 @@ class ViewController: UIViewController, WKNavigationDelegate {
         navigationController?.isToolbarHidden = false
         
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-        
-        let url = URL(string: "https://" + websites[0])!
-        webView.load(URLRequest(url: url))
-        webView.allowsBackForwardNavigationGestures = true
+
+
+        guard let site = selectedWebsite else { return }
+        if websites.contains(site),
+            let url = URL(string: "https://" + site) {
+            webView.load(URLRequest(url: url))
+            webView.allowsBackForwardNavigationGestures = true
+        } else {
+            badsiteAlert()
+        }
     }
     
-    @objc func goBack() {
-        if webView.canGoBack { webView.goBack() }
-    }
-
-    @objc func goForward() {
-        if webView.canGoForward { webView.goForward() }
-    }
+    @objc func goBack() { if webView.canGoBack { webView.goBack() }}
+    @objc func goForward() { if webView.canGoForward { webView.goForward() }}
     
     enum direction { case forward, back }
     
@@ -91,19 +93,21 @@ class ViewController: UIViewController, WKNavigationDelegate {
             for website in websites {
                 if host.contains(website) {
                     decisionHandler(.allow)
-                    print("Found \(host) in \(websites). Allowing...")
                     return
                 }
             }
         }
         
-        let message = "Website has not been whitelisted."
+        badsiteAlert()
         
+        decisionHandler(.cancel)
+    }
+    
+    func badsiteAlert() {
+        let message = "Website has not been whitelisted."
         let ac = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
         present(ac, animated: true)
-        
-        decisionHandler(.cancel)
     }
 }
 
