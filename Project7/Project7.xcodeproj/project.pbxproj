@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FB0BF5A2230604400BCA1C6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB0BF592230604400BCA1C6 /* DetailViewController.swift */; };
 		1FB9711D222F60B000D56DFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB9711C222F60B000D56DFE /* AppDelegate.swift */; };
 		1FB9711F222F60B000D56DFE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB9711E222F60B000D56DFE /* ViewController.swift */; };
 		1FB97122222F60B000D56DFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FB97120222F60B000D56DFE /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1FB0BF592230604400BCA1C6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1FB97119222F60B000D56DFE /* Project7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FB9711C222F60B000D56DFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FB9711E222F60B000D56DFE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,11 +60,12 @@
 		1FB9711B222F60B000D56DFE /* Project7 */ = {
 			isa = PBXGroup;
 			children = (
-				1FB9711C222F60B000D56DFE /* AppDelegate.swift */,
+				1FB0BF592230604400BCA1C6 /* DetailViewController.swift */,
 				1FB9711E222F60B000D56DFE /* ViewController.swift */,
 				1FB9712E222F635200D56DFE /* Petition.swift */,
 				1FB97130222F63CE00D56DFE /* Petitions.swift */,
 				1FB97120222F60B000D56DFE /* Main.storyboard */,
+				1FB9711C222F60B000D56DFE /* AppDelegate.swift */,
 				1FB97123222F60B100D56DFE /* Assets.xcassets */,
 				1FB97125222F60B100D56DFE /* LaunchScreen.storyboard */,
 				1FB97128222F60B100D56DFE /* Info.plist */,
@@ -143,6 +146,7 @@
 			files = (
 				1FB9711F222F60B000D56DFE /* ViewController.swift in Sources */,
 				1FB97131222F63CE00D56DFE /* Petitions.swift in Sources */,
+				1FB0BF5A2230604400BCA1C6 /* DetailViewController.swift in Sources */,
 				1FB9711D222F60B000D56DFE /* AppDelegate.swift in Sources */,
 				1FB9712F222F635200D56DFE /* Petition.swift in Sources */,
 			);
