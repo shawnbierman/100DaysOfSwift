@@ -12,4 +12,7 @@ struct Petition: Codable {
     var title: String
     var body: String
     var signatureCount: Int
+    var signatureThreshold: Int
+    var status: String
+    var issues: [Issues]
 }
