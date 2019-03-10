@@ -19,12 +19,13 @@ class ViewController: UIViewController {
     var activatedButtons = [UIButton]()
     var solutions = [String]()
     
+    var hiddenButtons = 0
+    var level = 1
     var score = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
         }
     }
-    var level = 1
     
     override func loadView() {
         view = UIView()
@@ -124,6 +125,9 @@ class ViewController: UIViewController {
                 letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
                 letterButton.setTitle("WWW", for: .normal)
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
+                letterButton.layer.borderWidth = 0.5
+                letterButton.layer.cornerRadius = 8
+                letterButton.layer.borderColor = UIColor.gray.cgColor
                 
                 let frame = CGRect(x: column * width, y: row * height, width: width, height: height)
                 letterButton.frame = frame
@@ -144,6 +148,7 @@ class ViewController: UIViewController {
         currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
         activatedButtons.append(sender)
         sender.isHidden = true
+        hiddenButtons += 1
     }
 
     @objc func submitTapped(_ sender: UIButton) {
@@ -159,11 +164,18 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score += 1
             
-            if score % 7 == 0 {
+            if hiddenButtons == 20 {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        } else {
+            self.score -= 1
+            self.clearTapped(sender)
+            
+            let ac = UIAlertController(title: "Sorry!", message: "Not a puzzle word!", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Try again.", style: .default, handler: nil))
+            present(ac, animated: true)
         }
     }
     
@@ -171,6 +183,7 @@ class ViewController: UIViewController {
         level += 1
         
         solutions.removeAll(keepingCapacity: true)
+        hiddenButtons = 0
         loadLevel()
         
         for button in letterButtons {
@@ -183,6 +196,7 @@ class ViewController: UIViewController {
         
         for button in activatedButtons {
             button.isHidden = false
+            hiddenButtons -= 1
         }
         
         activatedButtons.removeAll()
