@@ -15,13 +15,17 @@ class ViewController: UITableViewController {
     var filterIsOn = false {
         didSet {
             if filterIsOn {
-                navigationItem.leftBarButtonItem?.style = .done
-                navigationItem.leftBarButtonItem?.title = "Filtered"
-                tableView.reloadData()
-                setTitle("\(petitions.count) petitions found")
+                DispatchQueue.main.async { [weak self] in
+                    self?.navigationItem.leftBarButtonItem?.style = .done
+                    self?.navigationItem.leftBarButtonItem?.title = "Filtered"
+                    self?.tableView.reloadData()
+                    self?.setTitle("\(self?.petitions.count ?? 0) petitions found")
+                }
             } else {
-                navigationItem.leftBarButtonItem?.style = .plain
-                navigationItem.leftBarButtonItem?.title = "Filter"
+                DispatchQueue.main.async { [weak self] in
+                    self?.navigationItem.leftBarButtonItem?.style = .plain
+                    self?.navigationItem.leftBarButtonItem?.title = "Filter"
+                }
                 fetchJSON()
                 setTitle()
             }
@@ -71,14 +75,16 @@ class ViewController: UITableViewController {
                 if filter.isEmpty {
                     return
                 } else {
-                    self?.filteredPetitions.removeAll(keepingCapacity: true)
-                    self?.petitions.forEach({ [weak self] petition in
-                        if petition.body.localizedCaseInsensitiveContains(filter) {
-                            self?.filteredPetitions.append(petition)
-                        }
-                    })
-                    self?.petitions = (self?.filteredPetitions)!
-                    self?.filterIsOn = true
+                    DispatchQueue.global(qos: .background).async {
+                        self?.filteredPetitions.removeAll(keepingCapacity: true)
+                        self?.petitions.forEach({ [weak self] petition in
+                            if petition.body.localizedCaseInsensitiveContains(filter) {
+                                self?.filteredPetitions.append(petition)
+                            }
+                        })
+                        self?.petitions = (self?.filteredPetitions)!
+                        self?.filterIsOn = true
+                    }
                 }
             }
             
