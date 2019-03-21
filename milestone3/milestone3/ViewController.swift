@@ -16,29 +16,28 @@ class ViewController: UIViewController {
                     "O","P","Q","R","S","T","U",
                     "-","V","W","X","Y","Z","-"]
 
-    let wordLabel = UILabel()
-
-    var letterButtons = [UIButton]()
-    var activeButtons = [UIButton]()
-    var hiddenButtons = [UIButton]()
+    var letterButtons = [UIButton]()    // all the buttons with letters on them
+    var hiddenButtons = [UIButton]()    // buttons that have been used
+    var wordLabel = UILabel()           // the label that displays currentWord
     
-    var words = [String]()
-    var usedWords = [String]()
-    var usedLetters = [String]()
-    var guessCount = 0
+    var currentWord: String = ""        // the current word
+    var currentWordMask: String = ""    // the currentWord masked by underscores
+    var words = [String]()              // all the words to choose from
+    var usedWords = [String]()          // words that have been used
+    var usedLetters = [String]()        // letters that have been used (guessed)
+    var guessCount = 0                  // current total of guesses
     
     override func loadView() {
         view = UIView()
         view.backgroundColor = .white
 
         let buttonsView = UIView()
-        buttonsView.backgroundColor = .lightGray
         
         wordLabel.textAlignment = .center
-        wordLabel.backgroundColor = .green
         wordLabel.baselineAdjustment = .alignCenters
-        wordLabel.text = "TEMPERATURE"
-        wordLabel.font = UIFont.systemFont(ofSize: 50)
+        wordLabel.text = currentWord
+        wordLabel.textColor = .black
+        wordLabel.font = UIFont.systemFont(ofSize: 50, weight: .black)
         
         for view in [buttonsView, wordLabel] {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +72,7 @@ class ViewController: UIViewController {
         
         let constraints: [NSLayoutConstraint] = [
             buttonsView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor),
-            buttonsView.heightAnchor.constraint(equalToConstant: 250),
+            buttonsView.heightAnchor.constraint(equalToConstant: 230),
             buttonsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -20),
             
@@ -100,31 +99,74 @@ class ViewController: UIViewController {
         hiddenButtons.append(sender)
 
         if guessCount == allowedGuesses {
-            let ac = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "New Word", style: .default, handler: { [weak self] _ in
-                self?.resetGame()
+            let ac = UIAlertController(title: "Game Over!", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Restart", style: .default, handler: { [weak self] _ in
+                self?.startGame()
             }))
+            present(ac, animated: true)
             print("Game over")
         }
     }
     
     func loadWordList() {
-        if let textfileUrl = Bundle.main.url(forResource: "Wordlist", withExtension: "txt") {
-            if let stringsFromTextfile = try? String(contentsOf: textfileUrl) {
-                self.words = stringsFromTextfile.components(separatedBy: "\n").shuffled()
-                print(words)
+        if words.count == 0 {
+            if let textfileUrl = Bundle.main.url(forResource: "Wordlist", withExtension: "txt") {
+                if let stringsFromTextfile = try? String(contentsOf: textfileUrl) {
+                    self.words = stringsFromTextfile.components(separatedBy: "\n").shuffled()
+//                    print(words)
+                }
             }
         }
     }
-    
-    func resetGame() {
+
+    func getRandomWord() {
+        if let word = words.randomElement() {
+            currentWord = word
+            words.remove(at: words.firstIndex(of: currentWord)!)
+            print(words)
+            for char in currentWord {
+                print("char: \(char)")
+            }
+        } else {
+            // No more words. Game over.
+        }
+    }
+
+    func startGame() {
         guessCount = 0
-        for button in hiddenButtons { button.isHidden = false }
+        
+        for button in hiddenButtons {
+            button.isHidden = false
+
+            button.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+            UIView.animate(withDuration: 1.0, delay: Double.random(in: 0...0.09), usingSpringWithDamping: CGFloat(0.12), initialSpringVelocity: CGFloat(9.0), options: UIView.AnimationOptions.allowUserInteraction, animations: { button.transform = CGAffineTransform.identity }, completion: nil)
+        }
+        
+        words.removeAll(keepingCapacity: true)
+        usedWords.removeAll(keepingCapacity: true)
+        usedLetters.removeAll(keepingCapacity: true)
         hiddenButtons.removeAll(keepingCapacity: true)
+        
+        loadWordList()
+        getRandomWord()
+//        currentWord = getRandomWord()
+        
+        wordLabel.text = currentWord
+        wordLabel.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: CGFloat(0.22), initialSpringVelocity: CGFloat(9.0), options: UIView.AnimationOptions.allowUserInteraction, animations: { self.wordLabel.transform = CGAffineTransform.identity }, completion: nil)
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadWordList()
+        startGame()
     }
 }
+
+//extension Array {
+//    mutating func pluck(_ element: String) -> String? {
+//        if let word = self.randomElement() {
+//            self.removeAll { $0 == word }
+//        }
+//    }
+//}
