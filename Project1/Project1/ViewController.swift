@@ -53,7 +53,7 @@ class ViewController: UITableViewController {
         
         let count = defaults.integer(forKey: pictures[indexPath.row])
         cell.detailTextLabel?.textColor = UIColor.gray
-        cell.detailTextLabel?.text = "\(count) views."
+        cell.detailTextLabel?.text = count == 1 ? "\(count) view." : "\(count) views."
         
         return cell
     }
