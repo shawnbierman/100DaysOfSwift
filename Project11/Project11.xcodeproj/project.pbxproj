@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F7314072248F3CE00528FBE /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F7314062248F3CE00528FBE /* FireParticles.sks */; };
 		1FD8C377223F27B300D8B4BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8C376223F27B300D8B4BB /* AppDelegate.swift */; };
 		1FD8C379223F27B300D8B4BB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FD8C378223F27B300D8B4BB /* GameScene.sks */; };
 		1FD8C37D223F27B300D8B4BB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8C37C223F27B300D8B4BB /* GameScene.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F7314062248F3CE00528FBE /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticles.sks; sourceTree = "<group>"; };
 		1FD8C373223F27B300D8B4BB /* Project11.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project11.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD8C376223F27B300D8B4BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD8C378223F27B300D8B4BB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				1FD8C37E223F27B300D8B4BB /* GameViewController.swift */,
 				1FD8C380223F27B300D8B4BB /* Main.storyboard */,
 				1FD8C383223F27B400D8B4BB /* Assets.xcassets */,
+				1F7314062248F3CE00528FBE /* FireParticles.sks */,
 				1FD8C385223F27B400D8B4BB /* LaunchScreen.storyboard */,
 				1FD8C388223F27B400D8B4BB /* Info.plist */,
 			);
@@ -102,6 +105,7 @@
 				TargetAttributes = {
 					1FD8C372223F27B300D8B4BB = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -130,6 +134,7 @@
 			files = (
 				1FD8C382223F27B300D8B4BB /* Main.storyboard in Resources */,
 				1FD8C379223F27B300D8B4BB /* GameScene.sks in Resources */,
+				1F7314072248F3CE00528FBE /* FireParticles.sks in Resources */,
 				1FD8C384223F27B400D8B4BB /* Assets.xcassets in Resources */,
 				1FD8C387223F27B400D8B4BB /* LaunchScreen.storyboard in Resources */,
 			);
@@ -299,7 +304,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shawnbierman.Project11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -317,7 +322,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shawnbierman.Project11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

@@ -10,6 +10,8 @@ import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var currentBalls = 5
+    
     var scoreLabel: SKLabelNode!
     var score = 0 {
         didSet {
@@ -78,10 +80,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
                 box.physicsBody?.isDynamic = false
+                box.name = "box"
+                
                 addChild(box)
             } else {
-                if location.y > 500 {
-                    let ball = SKSpriteNode(imageNamed: "ballRed")
+                if location.y > 500 && currentBalls > 0 {
+                    currentBalls -= 1
+                    guard let ballName = ["ballBlue", "ballCyan", "ballGreen", "ballGrey", "ballPurple", "ballRed", "ballYellow"].randomElement() else { return }
+                    let ball = SKSpriteNode(imageNamed: ballName)
                     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
                     ball.physicsBody?.restitution = 0.4
                     ball.physicsBody?.contactTestBitMask = ball.physicsBody?.collisionBitMask ?? 0
@@ -140,12 +146,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func destroy(ball: SKNode) {
+        if let fireParticles = SKEmitterNode(fileNamed: "FireParticles") {
+            fireParticles.position = ball.position
+            addChild(fireParticles)
+        }
         ball.removeFromParent()
+    }
+    
+    func remove(box: SKNode) {
+        box.removeFromParent()
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
         guard let nodeA = contact.bodyA.node else { return }
         guard let nodeB = contact.bodyB.node else { return }
+        
+        if nodeA.name == "box" {
+            remove(box: nodeA)
+        } else if nodeB.name == "box" {
+            remove(box: nodeB)
+        }
         
         if nodeA.name == "ball" {
             collision(between: nodeA, object: nodeB)
