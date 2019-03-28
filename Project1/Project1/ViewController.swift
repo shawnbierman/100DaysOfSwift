@@ -36,6 +36,11 @@ class ViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pictures.count
     }
@@ -43,6 +48,13 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         cell.textLabel?.text = pictures[indexPath.row]
+        
+        let defaults = UserDefaults.standard
+        
+        let count = defaults.integer(forKey: pictures[indexPath.row])
+        cell.detailTextLabel?.textColor = UIColor.gray
+        cell.detailTextLabel?.text = "\(count) views."
+        
         return cell
     }
     
@@ -54,6 +66,14 @@ class ViewController: UITableViewController {
             if let selectedImage = vc.selectedImage,                        // unwrapped filename
                 let imageIndex = pictures.firstIndex(of: selectedImage) {   // unwrapped index
                 vc.title = "Picture \(imageIndex + 1) of \(pictures.count)" // set formatted title
+                
+                let defaults = UserDefaults.standard
+                
+                let count = defaults.integer(forKey: selectedImage) + 1
+                print("\(selectedImage) viewed \(count) times.")
+                
+                defaults.set(count, forKey: selectedImage)
+                
             } else {
                 vc.title = vc.selectedImage                                 // fallback to <filename>
             }
