@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FD7629D224FFB280092FC18 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7629C224FFB280092FC18 /* GameState.swift */; };
 		1FF8DD3C22283D4A009624DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8DD3B22283D4A009624DD /* AppDelegate.swift */; };
 		1FF8DD3E22283D4A009624DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8DD3D22283D4A009624DD /* ViewController.swift */; };
 		1FF8DD4122283D4A009624DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF8DD3F22283D4A009624DD /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1FD7629C224FFB280092FC18 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		1FF8DD3822283D4A009624DD /* Project5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF8DD3B22283D4A009624DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF8DD3D22283D4A009624DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				1FF8DD3B22283D4A009624DD /* AppDelegate.swift */,
 				1FF8DD3D22283D4A009624DD /* ViewController.swift */,
+				1FD7629C224FFB280092FC18 /* GameState.swift */,
 				1FF8DD3F22283D4A009624DD /* Main.storyboard */,
 				1FF8DD4222283D4B009624DD /* Assets.xcassets */,
 				1FF8DD4422283D4B009624DD /* LaunchScreen.storyboard */,
@@ -99,6 +102,7 @@
 				TargetAttributes = {
 					1FF8DD3722283D4A009624DD = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -139,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FD7629D224FFB280092FC18 /* GameState.swift in Sources */,
 				1FF8DD3E22283D4A009624DD /* ViewController.swift in Sources */,
 				1FF8DD3C22283D4A009624DD /* AppDelegate.swift in Sources */,
 			);
@@ -295,7 +300,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shawnbierman.Project5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -313,7 +318,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shawnbierman.Project5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

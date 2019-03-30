@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct GameState: Codable {
+    var currentWord: String
+    var words: [String]
+}

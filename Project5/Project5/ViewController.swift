@@ -13,6 +13,7 @@ class ViewController: UITableViewController {
     var allWords = [String]()
     var usedWords = [String]()
     let cellId = "Word"
+    var state: GameState?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +30,63 @@ class ViewController: UITableViewController {
         
         if allWords.isEmpty { allWords = ["silkworm"] }
         
-        startGame()
+        let defaults = UserDefaults.standard
+        if let gameState = defaults.object(forKey: "gameState") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                state = try jsonDecoder.decode(GameState.self, from: gameState)
+            } catch {
+                print("Failed to load saved game.")
+            }
+        }
+        
+        if state != nil {
+            loadGame()
+        } else {
+           startGame()
+        }
+        
     }
-
+    
     @objc func startGame() {
         title = allWords.randomElement()
         usedWords.removeAll(keepingCapacity: true)
         tableView.reloadData()
     }
 
+    fileprivate func loadGame() {
+        
+        if let currentWord = state?.currentWord {
+            title = currentWord
+        } else {
+            title = allWords.randomElement()
+        }
+        
+        if let words = state?.words {
+            usedWords = words
+        } else {
+            usedWords.removeAll(keepingCapacity: true)
+        }
+        
+        tableView.reloadData()
+    }
+    
+    fileprivate func save() {
+        
+        guard let title = title else { return }
+        
+        let gameState = GameState(currentWord: title, words: usedWords)
+        let jsonEncoder = JSONEncoder()
+        
+        if let savedData = try? jsonEncoder.encode(gameState) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "gameState")
+        } else {
+            print("Failed to save current game state.")
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usedWords.count
     }
@@ -72,6 +121,8 @@ class ViewController: UITableViewController {
                     // animate cell insertion, rather than .reloadData()
                     let indexPath = IndexPath(row: 0, section: 0)
                     tableView.insertRows(at: [indexPath], with: .automatic)
+                    
+                    save()
                     
                     return
                     
