@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var score = 0
     var correctAnswer = 0
     var questionsAnswered = 0
-    let maxQuestions = 10
+    let maxQuestions = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,20 +66,37 @@ class ViewController: UIViewController {
 
     }
     
+    @objc fileprivate func resetGame(action: UIAlertAction!) {
+        print("reset game")
+        score = 0
+        questionsAnswered = score
+        askQuestion(action: nil)
+    }
+    
     func alert(title: String) {
         
-        if questionsAnswered < maxQuestions {
+        print("Score: \(score)")
+        
+        if questionsAnswered < (maxQuestions - 1) {
             let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
             present(ac, animated: true)
         } else {
-            let ac = UIAlertController(title: "Game Over", message: "Your final score is \(score)", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: askQuestion))
-            present(ac, animated: true, completion: nil)
-            score = 0
-            questionsAnswered = 0
+            
+            let defaults = UserDefaults.standard
+            let highScore = defaults.integer(forKey: "highScore")
+            print("High score is \(highScore)")
+            if score > highScore {
+                defaults.set(score, forKey: "highScore")
+                let ac = UIAlertController(title: "High Score", message: "Congratulations! \(score) is your new high score.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: resetGame))
+                present(ac, animated: true)
+            } else {
+                let ac = UIAlertController(title: "Game Over", message: "Your final score is \(score)", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: resetGame))
+                present(ac, animated: true, completion: nil)
+            }
         }
-        
     }
     
     @objc func showScore() {
