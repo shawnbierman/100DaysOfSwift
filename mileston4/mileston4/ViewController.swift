@@ -1,15 +1,15 @@
 //
 //  ViewController.swift
-//  Project13
+//  mileston4
 //
-//  Created by Shawn Bierman on 3/31/19.
+//  Created by Shawn Bierman on 4/6/19.
 //  Copyright © 2019 Shawn Bierman. All rights reserved.
 //
 
 import UIKit
 
 class ViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
+    
     var photos = [Photo]()
     
     override func viewDidLoad() {
@@ -22,8 +22,8 @@ class ViewController: UITableViewController, UINavigationControllerDelegate, UII
     
     @objc fileprivate func handleNewPhoto() {
         let picker = UIImagePickerController()
-            picker.allowsEditing = true
-            picker.delegate      = self
+        picker.allowsEditing = true
+        picker.delegate      = self
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.sourceType = .camera
@@ -31,7 +31,7 @@ class ViewController: UITableViewController, UINavigationControllerDelegate, UII
         
         present(picker, animated: true, completion: nil)
     }
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         
@@ -52,7 +52,7 @@ class ViewController: UITableViewController, UINavigationControllerDelegate, UII
             self?.tableView.reloadData()
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
+        
         present(ac, animated: true, completion: nil)
     }
     
@@ -81,11 +81,11 @@ class ViewController: UITableViewController, UINavigationControllerDelegate, UII
         let cell  = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let photo = photos[indexPath.row]
         let path  = getDocumentsDirectory().appendingPathComponent(photo.name)
-
+        
         cell.imageView?.image       = UIImage(contentsOfFile: path.path)
         cell.textLabel?.text        = photo.name
         cell.detailTextLabel?.text  = photo.caption
-
+        
         return cell
     }
 }
