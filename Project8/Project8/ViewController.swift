@@ -147,7 +147,13 @@ class ViewController: UIViewController {
         
         currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
         activatedButtons.append(sender)
-        sender.isHidden = true
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            sender.alpha = 0
+        }) { hidden in
+            sender.isHidden = true
+        }
+        
         hiddenButtons += 1
     }
 
@@ -187,6 +193,7 @@ class ViewController: UIViewController {
         loadLevel()
         
         for button in letterButtons {
+            button.alpha = 1
             button.isHidden = false
         }
     }
@@ -195,6 +202,7 @@ class ViewController: UIViewController {
         currentAnswer.text = ""
         
         for button in activatedButtons {
+            button.alpha = 1
             button.isHidden = false
             hiddenButtons -= 1
         }

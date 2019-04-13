@@ -35,6 +35,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         radius.isEnabled = false
         scale.isEnabled = false
         
+        imageView.alpha = 0
+        
         imagePicker()
     }
     
@@ -67,7 +69,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         applyProcessing()
     }
-
+    
     @IBAction func intensityChanged(_ sender: Any) {
         applyProcessing()
     }
@@ -120,16 +122,21 @@ extension ViewController {
         let picker = UIImagePickerController()
         picker.allowsEditing = true
         picker.delegate = self
+        imageView.alpha = 0
         present(picker, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         
-        dismiss(animated: true)
-        
         currentImage = image
         imageView.image = currentImage
+        
+        dismiss(animated: true) {
+            UIView.animate(withDuration: 0.4, delay: 0, options: [], animations: { [weak self] in
+                self?.imageView.alpha = 1
+                }, completion: nil)
+        }
     }
     
     @objc func save(_ sender: Any) {

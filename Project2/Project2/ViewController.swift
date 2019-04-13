@@ -61,6 +61,14 @@ class ViewController: UIViewController {
             score -= 1
         }
 
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 5, options: [], animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }, completion: { (animated) in
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 5, options: [], animations: {
+                sender.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }, completion: nil)
+        })
+        
         alert(title: title)
         questionsAnswered += 1
 
