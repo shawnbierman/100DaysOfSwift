@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F49982A22623F6C00AB6096 /* gameover.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1F49982922623F6C00AB6096 /* gameover.m4a */; };
+		1F49982C2262433E00AB6096 /* smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F49982B2262433E00AB6096 /* smoke.sks */; };
+		1F499834226245E400AB6096 /* mud.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F499832226245E400AB6096 /* mud.sks */; };
 		1FFD11BC225D40B70054ADCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD11BB225D40B70054ADCA /* AppDelegate.swift */; };
 		1FFD11C2225D40B70054ADCA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD11C1225D40B70054ADCA /* GameScene.swift */; };
 		1FFD11C4225D40B70054ADCA /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD11C3225D40B70054ADCA /* GameViewController.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F49982922623F6C00AB6096 /* gameover.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameover.m4a; sourceTree = "<group>"; };
+		1F49982B2262433E00AB6096 /* smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = smoke.sks; sourceTree = "<group>"; };
+		1F499832226245E400AB6096 /* mud.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = mud.sks; sourceTree = "<group>"; };
 		1FFD11B8225D40B70054ADCA /* Project14.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project14.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FFD11BB225D40B70054ADCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FFD11C1225D40B70054ADCA /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -45,6 +51,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F49982F226244E200AB6096 /* particles */ = {
+			isa = PBXGroup;
+			children = (
+				1F49982B2262433E00AB6096 /* smoke.sks */,
+				1F499832226245E400AB6096 /* mud.sks */,
+			);
+			path = particles;
+			sourceTree = "<group>";
+		};
+		1F499830226244F000AB6096 /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1FFD11C5225D40B70054ADCA /* Main.storyboard */,
+				1FFD11CA225D40B80054ADCA /* LaunchScreen.storyboard */,
+			);
+			path = storyboards;
+			sourceTree = "<group>";
+		};
+		1F4998312262450600AB6096 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				1FFD11D5225D41DA0054ADCA /* whack.caf */,
+				1FFD11D6225D41DA0054ADCA /* whackBad.caf */,
+				1F49982922623F6C00AB6096 /* gameover.m4a */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		1FFD11AF225D40B70054ADCA = {
 			isa = PBXGroup;
 			children = (
@@ -64,17 +98,16 @@
 		1FFD11BA225D40B70054ADCA /* Project14 */ = {
 			isa = PBXGroup;
 			children = (
-				1FFD11BB225D40B70054ADCA /* AppDelegate.swift */,
-				1FFD11D3225D41080054ADCA /* GameScene.sks */,
 				1FFD11C1225D40B70054ADCA /* GameScene.swift */,
 				1FFD11C3225D40B70054ADCA /* GameViewController.swift */,
 				1FFD11D9225D74FE0054ADCA /* WhackSlot.swift */,
-				1FFD11C5225D40B70054ADCA /* Main.storyboard */,
+				1FFD11BB225D40B70054ADCA /* AppDelegate.swift */,
+				1FFD11D3225D41080054ADCA /* GameScene.sks */,
 				1FFD11C8225D40B80054ADCA /* Assets.xcassets */,
-				1FFD11CA225D40B80054ADCA /* LaunchScreen.storyboard */,
+				1F49982F226244E200AB6096 /* particles */,
+				1F499830226244F000AB6096 /* storyboards */,
+				1F4998312262450600AB6096 /* Sounds */,
 				1FFD11CD225D40B80054ADCA /* Info.plist */,
-				1FFD11D5225D41DA0054ADCA /* whack.caf */,
-				1FFD11D6225D41DA0054ADCA /* whackBad.caf */,
 			);
 			path = Project14;
 			sourceTree = "<group>";
@@ -140,9 +173,12 @@
 				1FFD11D4225D41080054ADCA /* GameScene.sks in Resources */,
 				1FFD11D7225D41DA0054ADCA /* whack.caf in Resources */,
 				1FFD11C7225D40B70054ADCA /* Main.storyboard in Resources */,
+				1F499834226245E400AB6096 /* mud.sks in Resources */,
+				1F49982A22623F6C00AB6096 /* gameover.m4a in Resources */,
 				1FFD11C9225D40B80054ADCA /* Assets.xcassets in Resources */,
 				1FFD11CC225D40B80054ADCA /* LaunchScreen.storyboard in Resources */,
 				1FFD11D8225D41DA0054ADCA /* whackBad.caf in Resources */,
+				1F49982C2262433E00AB6096 /* smoke.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
