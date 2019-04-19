@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4574E3226A79A200C0D57E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4574E2226A79A200C0D57E /* DetailViewController.swift */; };
 		1FFA065C226A54C500C1268B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFA065B226A54C500C1268B /* AppDelegate.swift */; };
 		1FFA065E226A54C500C1268B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFA065D226A54C500C1268B /* ViewController.swift */; };
 		1FFA0661226A54C500C1268B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FFA065F226A54C500C1268B /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F4574E2226A79A200C0D57E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1FFA0658226A54C500C1268B /* Project16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FFA065B226A54C500C1268B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FFA065D226A54C500C1268B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,9 +58,10 @@
 		1FFA065A226A54C500C1268B /* Project16 */ = {
 			isa = PBXGroup;
 			children = (
-				1FFA065B226A54C500C1268B /* AppDelegate.swift */,
+				1F4574E2226A79A200C0D57E /* DetailViewController.swift */,
 				1FFA065D226A54C500C1268B /* ViewController.swift */,
 				1FFA066D226A568B00C1268B /* Capital.swift */,
+				1FFA065B226A54C500C1268B /* AppDelegate.swift */,
 				1FFA065F226A54C500C1268B /* Main.storyboard */,
 				1FFA0662226A54C600C1268B /* Assets.xcassets */,
 				1FFA0664226A54C600C1268B /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				1FFA065E226A54C500C1268B /* ViewController.swift in Sources */,
 				1FFA065C226A54C500C1268B /* AppDelegate.swift in Sources */,
 				1FFA066E226A568B00C1268B /* Capital.swift in Sources */,
+				1F4574E3226A79A200C0D57E /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

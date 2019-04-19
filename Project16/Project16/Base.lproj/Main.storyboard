@@ -43,6 +43,40 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="vNc-Od-2O6">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" id="B6f-In-vdF" customClass="DetailViewController" customModule="Project16" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oyg-Na-ZlA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eT3-XB-16F">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eT3-XB-16F" secondAttribute="trailing" id="6NT-8t-6se"/>
+                            <constraint firstAttribute="bottom" secondItem="eT3-XB-16F" secondAttribute="bottom" id="D0w-GK-Q15"/>
+                            <constraint firstItem="eT3-XB-16F" firstAttribute="top" secondItem="W5N-rx-0uU" secondAttribute="top" id="P04-5j-LoE"/>
+                            <constraint firstItem="eT3-XB-16F" firstAttribute="leading" secondItem="Oyg-Na-ZlA" secondAttribute="leading" id="bVP-oZ-aM5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="W5N-rx-0uU"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="eT3-XB-16F" id="1n8-vO-AMS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6b4-Rd-6H2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1811.594202898551" y="134.59821428571428"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="F1p-59-tSc">
             <objects>
