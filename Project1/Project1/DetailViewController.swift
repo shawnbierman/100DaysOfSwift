@@ -19,6 +19,9 @@ class DetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         
         imageView.clipsToBounds = true
+        
+        assert(selectedImage != nil, "selectedImage is nil!")
+        
         if let imageToLoad = selectedImage {
             imageView.image = UIImage(named: imageToLoad)
         }
