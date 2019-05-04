@@ -9,19 +9,38 @@
 import UserNotifications
 import UIKit
 
+// swiftlint:disable line_length
 class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(registerLocal))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleLocal))
+        setupNavBarButtons()
+    }
+
+    fileprivate func setupNavBarButtons() {
+        let regBtn   = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(registerLocal))
+        let schedBtn = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleLocal))
+
+        navigationItem.leftBarButtonItem  = regBtn
+        navigationItem.rightBarButtonItem = schedBtn
+    }
+
+    func registerCategories() {
+        let center        = UNUserNotificationCenter.current()
+        let alarmCategory = UNNotificationCategory(identifier: "alarm",
+                                                   actions: [UNNotificationAction(identifier: "show", title: "Tell me more", options: .foreground),
+                                                             UNNotificationAction(identifier: "delay", title: "Remind me tomorrow", options: .foreground)],
+                                                   intentIdentifiers: [],
+                                                   options: [])
+
+        center.delegate = self
+        center.setNotificationCategories([alarmCategory])
     }
 
     @objc func registerLocal() {
         let center = UNUserNotificationCenter.current()
-        
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
             if granted {
                 print("Yay!")
             } else {
@@ -29,57 +48,63 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
             }
         }
     }
-    
-    @objc func scheduleLocal() {
+
+    @objc func scheduleLocal(delay delayed: Bool = true) {
+
         registerCategories()
-        
+
         let center = UNUserNotificationCenter.current()
-        center.removeAllPendingNotificationRequests()
-        
+            center.removeAllPendingNotificationRequests()
+
         let content = UNMutableNotificationContent()
-        content.title = "Late wake up call"
-        content.body = "The early bird catches the worm, but the second mouse gets the cheese."
-        content.categoryIdentifier = "alarm"
-        content.userInfo = ["customData": "fizzbuzz"]
-        content.sound = .default
-        
-        var dateComponents = DateComponents()
-        dateComponents.hour = 10
-        dateComponents.minute = 30
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        center.add(request)
+            content.title               = "Late wake up call"
+            content.body                = "The early bird catches the worm, but the second mouse gets the cheese."
+            content.categoryIdentifier  = "alarm"
+            content.userInfo            = ["customData": "fizzbuzz"]
+            content.sound               = .default
+
+        if delayed {
+            var dateComponents = DateComponents()
+                dateComponents.hour   = 8
+                dateComponents.minute = 0
+                dateComponents.second = 0
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            center.add(request)
+        } else {
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            center.add(request)
+        }
     }
-    
-    func registerCategories() {
-        let center = UNUserNotificationCenter.current()
-        center.delegate = self
-        
-        let show = UNNotificationAction(identifier: "show", title: "Tell me more", options: .foreground)
-        let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [], options: [])
-        
-        center.setNotificationCategories([category])
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+
         let userInfo = response.notification.request.content.userInfo
-        
+        let center = UNUserNotificationCenter.current()
+            center.removeAllPendingNotificationRequests()
+
         if let customData = userInfo["customData"] as? String {
             print("Custom data received: \(customData)")
-            
+
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
-                // swiped to unlock
-                print("Default identifier")
+                showAlert(title: "Opened", message: "You clicked on the notification.", btnTitle: "OK")
             case "show":
-                print("Show more information...")
+                showAlert(title: "More Information", message: "So you want to see even more information?", btnTitle: "OK")
+            case "delay":
+                scheduleLocal(delay: true)
             default:
                 break
             }
         }
-        
         completionHandler()
+    }
+
+    fileprivate func showAlert(title withTitle: String, message withMsg: String, btnTitle: String) {
+        let alert = UIAlertController(title: withTitle, message: withMsg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: btnTitle, style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }
