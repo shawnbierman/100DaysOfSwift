@@ -41,11 +41,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         let center = UNUserNotificationCenter.current()
 
         center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
-            if granted {
-                print("Yay!")
-            } else {
-                print("Doh!")
-            }
+            if granted { print("Yay!") } else { print("Doh!") }
         }
     }
 
@@ -68,12 +64,15 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                 dateComponents.hour   = 8
                 dateComponents.minute = 0
                 dateComponents.second = 0
+
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
             center.add(request)
         } else {
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
             center.add(request)
         }
     }
@@ -104,7 +103,8 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     fileprivate func showAlert(title withTitle: String, message withMsg: String, btnTitle: String) {
         let alert = UIAlertController(title: withTitle, message: withMsg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: btnTitle, style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: btnTitle, style: .default, handler: nil))
+
         present(alert, animated: true)
     }
 }

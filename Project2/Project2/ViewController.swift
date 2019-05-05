@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import UserNotifications
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
@@ -40,12 +41,8 @@ class ViewController: UIViewController {
                                                             action: #selector(showScore))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                            target: self,
-                                                           action: #selector(scheduleReminders))
+                                                           action: #selector(scheduleLocal))
         askQuestion(action: nil)
-
-    }
-
-    @objc fileprivate func scheduleReminders() {
 
     }
 
@@ -142,6 +139,65 @@ class ViewController: UIViewController {
         present(alert, animated: true)
     }
 
+    func registerCategories() {
+        let center = UNUserNotificationCenter.current()
+        let action = UNNotificationAction(identifier: "show", title: "Remind me to play.", options: .foreground)
+        let alarm  = UNNotificationCategory(identifier: "alarm", actions: [action], intentIdentifiers: [], options: [])
+
+        center.delegate = self
+        center.setNotificationCategories([alarm])
+    }
+
+    @objc func scheduleLocal() {
+
+        let alert = UIAlertController(title: "Play Daily?",
+                                      message: "Would you like to be reminded to play daily?",
+                                      preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] (_) in
+
+            self?.registerCategories()
+
+            let center = UNUserNotificationCenter.current()
+                center.removeAllPendingNotificationRequests()
+
+            let content = UNMutableNotificationContent()
+                content.title               = "Time to play!"
+                content.body                = "You asked to remind to play the game. Let's go!"
+                content.categoryIdentifier  = "alarm"
+                content.userInfo            = ["customData": "fizzbuzz"]
+                content.sound               = .default
+
+            var dateComponents = DateComponents()
+                dateComponents.hour = 8
+
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+            center.add(request)
+        }))
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+
+        let center = UNUserNotificationCenter.current()
+            center.removeAllPendingNotificationRequests()
+
+        showAlert(title: "Time to play!",
+                  message: "You wanted a daily reminder.",
+                  btnTitle: "OK")
+
+        completionHandler()
+    }
+
+    fileprivate func showAlert(title withTitle: String, message withMsg: String, btnTitle: String) {
+        let alert = UIAlertController(title: withTitle, message: withMsg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: btnTitle, style: .default, handler: nil))
+
+        present(alert, animated: true)
+    }
 }
 
 // 1. Try adding the image name to the list of items that are shared.
