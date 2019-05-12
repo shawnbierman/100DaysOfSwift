@@ -13,10 +13,10 @@
 		1F1CCA4D227F437D0069768A /* FoldersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCA4C227F437D0069768A /* FoldersViewController.swift */; };
 		1F1CCA4F227F4D620069768A /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCA4E227F4D620069768A /* NotesViewController.swift */; };
 		1F1CCA51227F4DDE0069768A /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCA50227F4DDE0069768A /* BaseTableViewController.swift */; };
-		1F1CCA54227F635D0069768A /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCA53227F635D0069768A /* Note.swift */; };
 		1F1CCA57227F65350069768A /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCA56227F65350069768A /* NoteViewController.swift */; };
 		1F1CCA59227F659C0069768A /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCA58227F659C0069768A /* Folder.swift */; };
 		1F1CCA5B227F69730069768A /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCA5A227F69730069768A /* UIColor+Extensions.swift */; };
+		1F60FE2A22877AD900B99377 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60FE2922877AD900B99377 /* UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +28,10 @@
 		1F1CCA4C227F437D0069768A /* FoldersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersViewController.swift; sourceTree = "<group>"; };
 		1F1CCA4E227F4D620069768A /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		1F1CCA50227F4DDE0069768A /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
-		1F1CCA53227F635D0069768A /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		1F1CCA56227F65350069768A /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		1F1CCA58227F659C0069768A /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		1F1CCA5A227F69730069768A /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		1F60FE2922877AD900B99377 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +69,7 @@
 				1F1CCA4C227F437D0069768A /* FoldersViewController.swift */,
 				1F1CCA50227F4DDE0069768A /* BaseTableViewController.swift */,
 				1F1CCA55227F63DE0069768A /* Models */,
+				1F60FE2822877ACD00B99377 /* Extensions */,
 				1F1CCA41227F42C70069768A /* Assets.xcassets */,
 				1F1CCA5A227F69730069768A /* UIColor+Extensions.swift */,
 				1F1CCA3A227F42C70069768A /* AppDelegate.swift */,
@@ -81,10 +82,17 @@
 		1F1CCA55227F63DE0069768A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1F1CCA53227F635D0069768A /* Note.swift */,
 				1F1CCA58227F659C0069768A /* Folder.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1F60FE2822877ACD00B99377 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1F60FE2922877AD900B99377 /* UIView.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,13 +186,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F1CCA54227F635D0069768A /* Note.swift in Sources */,
 				1F1CCA3B227F42C70069768A /* AppDelegate.swift in Sources */,
 				1F1CCA4D227F437D0069768A /* FoldersViewController.swift in Sources */,
 				1F1CCA5B227F69730069768A /* UIColor+Extensions.swift in Sources */,
 				1F1CCA51227F4DDE0069768A /* BaseTableViewController.swift in Sources */,
 				1F1CCA57227F65350069768A /* NoteViewController.swift in Sources */,
 				1F1CCA4F227F4D620069768A /* NotesViewController.swift in Sources */,
+				1F60FE2A22877AD900B99377 /* UIView.swift in Sources */,
 				1F1CCA59227F659C0069768A /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

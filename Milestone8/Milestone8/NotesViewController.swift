@@ -21,12 +21,13 @@ class NotesViewController: BaseTableViewController {
         setupNavigationAndToolBar()
     }
 
-    @objc internal func editTapped() {
+    @objc internal func editButtonTapped() {
         print("tapped in folders view...")
     }
 
     @objc fileprivate func createNewFile() {
-        print("creating new file")
+        let controller = NoteViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     @objc fileprivate func showAttachments() {
@@ -35,8 +36,7 @@ class NotesViewController: BaseTableViewController {
 
     fileprivate func setupNavigationAndToolBar() {
 
-        let rightBtn = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
-        navigationItem.rightBarButtonItem = rightBtn
+        navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem?.style = UIBarButtonItem.Style.done
         navigationItem.rightBarButtonItem?.isEnabled = false
 

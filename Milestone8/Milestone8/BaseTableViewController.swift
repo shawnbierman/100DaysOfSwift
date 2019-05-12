@@ -28,4 +28,12 @@ class BaseTableViewController: UITableViewController {
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.tintColor = .gold
     }
+
+    public func alertWithOKButton(title: String, message: String) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            ok.setValue(UIColor.gold, forKey: "titleTextColor")
+        ac.addAction(ok)
+        present(ac, animated: true)
+    }
 }
