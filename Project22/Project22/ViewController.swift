@@ -12,7 +12,14 @@ import UIKit
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet var distanceReading: UILabel!
+    @IBOutlet var beaconIdLabel: UILabel!
+
     var locationManager: CLLocationManager?
+    var beaconDetected: Bool = false {
+        didSet {
+            showAlert(title: "Beacon Detected", message: "We've found our first beacon. Hoora!")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +28,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
 
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -37,40 +44,67 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     func startScanning() {
-        let uuid = UUID(uuidString: "5A4BCFCE-174E-4BAC-A814-092E77F6B7E5")!
-        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, major: 123, minor: 456, identifier: "MyBeacon")
+        let uuid1 = UUID(uuidString: "5A4BCFCE-174E-4BAC-A814-092E77F6B7E5")!
+        let uuid2 = UUID(uuidString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!
+        let uuid3 = UUID(uuidString: "74278BDA-B644-4520-8F0C-720EAF059935")!
 
-        locationManager?.startMonitoring(for: beaconRegion)
-        locationManager?.startRangingBeacons(in: beaconRegion)
+        let beaconRegion1 = CLBeaconRegion(proximityUUID: uuid1, major: 123, minor: 456, identifier: "beaconRegion1")
+        let beaconRegion2 = CLBeaconRegion(proximityUUID: uuid2, major: 123, minor: 456, identifier: "beaconRegion2")
+        let beaconRegion3 = CLBeaconRegion(proximityUUID: uuid3, major: 123, minor: 456, identifier: "beaconRegion3")
+
+        locationManager?.startMonitoring(for: beaconRegion1)
+        locationManager?.startRangingBeacons(in: beaconRegion1)
+
+        locationManager?.startMonitoring(for: beaconRegion2)
+        locationManager?.startRangingBeacons(in: beaconRegion2)
+
+        locationManager?.startMonitoring(for: beaconRegion3)
+        locationManager?.startRangingBeacons(in: beaconRegion3)
     }
 
-    func update(distance: CLProximity) {
+    func update(distance: CLProximity, id: UUID?) {
+
         UIView.animate(withDuration: 1) {
+
+            if let id = id { dump("Found \(id)") }
+
             switch distance {
             case .far:
                 self.view.backgroundColor = .blue
                 self.distanceReading.text = "FAR"
+                self.beaconIdLabel.text = id?.uuidString
 
             case .near:
                 self.view.backgroundColor = .orange
                 self.distanceReading.text = "NEAR"
+                self.beaconIdLabel.text = id?.uuidString
 
             case .immediate:
                 self.view.backgroundColor = .red
                 self.distanceReading.text = "RIGHT HERE"
+                self.beaconIdLabel.text = id?.uuidString
 
             default:
-                self.view.backgroundColor = .gray
+                self.view.backgroundColor = .white
                 self.distanceReading.text = "UNKNOWN"
+                self.beaconIdLabel.text = ""
             }
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        if let beacon = beacons.first {
-            update(distance: beacon.proximity)
-        } else {
-            update(distance: .unknown)
+        beacons.forEach { (beacon) in
+            if beacon.proximity != .unknown {
+                update(distance: beacon.proximity, id: beacon.proximityUUID)
+            } else {
+                update(distance: .unknown, id: nil)
+            }
         }
+    }
+
+    fileprivate func showAlert(title: String, message: String) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(ac, animated: true)
     }
 }

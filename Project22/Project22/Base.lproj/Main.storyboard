@@ -24,15 +24,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHy-KT-FXq">
+                                <rect key="frame" x="20" y="485" width="374" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="rd1-cK-SCC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VXg-Kc-BdD" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4On-8R-xnp"/>
                             <constraint firstItem="VXg-Kc-BdD" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="JUg-IO-WQq"/>
+                            <constraint firstItem="vHy-KT-FXq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Pe9-hR-LKa"/>
+                            <constraint firstItem="vHy-KT-FXq" firstAttribute="top" secondItem="VXg-Kc-BdD" secondAttribute="bottom" constant="8" id="TqS-8P-Pfa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vHy-KT-FXq" secondAttribute="trailing" constant="20" id="Tza-L8-1pM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="beaconIdLabel" destination="vHy-KT-FXq" id="tDj-MK-4dv"/>
                         <outlet property="distanceReading" destination="VXg-Kc-BdD" id="gr8-xb-8Pz"/>
                     </connections>
                 </viewController>
