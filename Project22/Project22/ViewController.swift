@@ -21,6 +21,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 
+    let circle: UIView = {
+        let circle = UIView()
+            circle.layer.cornerRadius = 128
+            circle.layer.borderColor = UIColor.black.cgColor
+            circle.layer.borderWidth = 1
+            circle.backgroundColor = UIColor.clear
+            circle.translatesAutoresizingMaskIntoConstraints = false
+        return circle
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +39,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager?.requestAlwaysAuthorization()
 
         view.backgroundColor = .white
+
+        view.addSubview(circle)
+
+        NSLayoutConstraint.activate([
+            circle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            circle.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            circle.widthAnchor.constraint(equalToConstant: 256),
+            circle.heightAnchor.constraint(equalToConstant: 256)
+            ])
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -64,32 +83,41 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     func update(distance: CLProximity, id: UUID?) {
 
-        UIView.animate(withDuration: 1) {
-
             if let id = id { dump("Found \(id)") }
 
             switch distance {
             case .far:
-                self.view.backgroundColor = .blue
-                self.distanceReading.text = "FAR"
-                self.beaconIdLabel.text = id?.uuidString
+                animateCircle(with: .blue, for: "FAR", having: id?.uuidString, duration: 2)
 
             case .near:
-                self.view.backgroundColor = .orange
-                self.distanceReading.text = "NEAR"
-                self.beaconIdLabel.text = id?.uuidString
+                animateCircle(with: .orange, for: "NEAR", having: id?.uuidString, duration: 1.0)
 
             case .immediate:
-                self.view.backgroundColor = .red
-                self.distanceReading.text = "RIGHT HERE"
-                self.beaconIdLabel.text = id?.uuidString
+                animateCircle(with: .red, for: "RIGHT HERE", having: id?.uuidString, duration: 0.2)
 
             default:
-                self.view.backgroundColor = .white
-                self.distanceReading.text = "UNKNOWN"
-                self.beaconIdLabel.text = ""
-            }
+                animateCircle(with: .white, for: "UNKNOWN", having: nil, duration: nil)
         }
+    }
+
+    fileprivate func animateCircle(with color: UIColor, for distance: String, having uuid: String?, duration: Double?) {
+
+        if let id = uuid {
+            self.beaconIdLabel.text = id
+        } else {
+            self.beaconIdLabel.text = ""
+        }
+
+        self.distanceReading.text = distance
+        self.view.backgroundColor = color
+
+        if let duration = duration {
+            UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: { [weak self] in
+                self?.circle.transform = CGAffineTransform(scaleX: 2, y: 2)
+            })
+            self.circle.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+
     }
 
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
