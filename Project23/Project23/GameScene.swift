@@ -124,11 +124,17 @@ class GameScene: SKScene {
         let nodesAtPoint = nodes(at: location)
 
         for case let node as SKSpriteNode in nodesAtPoint {
-            if node.name == "enemy" {
+            if node.name == "enemy" || node.name == "trump" {
                 // destroy penguin
                 if let emitter = SKEmitterNode(fileNamed: "sliceHitEnemy") {
                     emitter.position = node.position
                     addChild(emitter)
+                }
+
+                if node.name == "trump" {
+                    score += 10
+                } else {
+                    score += 1
                 }
 
                 node.name = ""
@@ -141,7 +147,7 @@ class GameScene: SKScene {
                 let seq = SKAction.sequence([group, .removeFromParent()])
                 node.run(seq)
 
-                score += 1
+//                score += 1
 
                 if let index = activeEnemies.firstIndex(of: node) {
                     activeEnemies.remove(at: index)
@@ -194,6 +200,11 @@ class GameScene: SKScene {
             livesImages[1].texture = SKTexture(imageNamed: "sliceLifeGone")
             livesImages[2].texture = SKTexture(imageNamed: "sliceLifeGone")
         }
+
+        let gameOver = SKSpriteNode(imageNamed: "gameOver")
+        gameOver.position = CGPoint(x: 512, y: 384)
+        gameOver.zPosition = +1
+        addChild(gameOver)
     }
 
     func playSwooshSound() {
@@ -290,12 +301,24 @@ class GameScene: SKScene {
             }
 
         } else {
-            enemy = SKSpriteNode(imageNamed: "penguin")
-            run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
-            enemy.name = "enemy"
+
+            let randomNumber = Int.random(in: 0...1000)
+            if randomNumber > 700 {
+                enemy = SKSpriteNode(imageNamed: "trump")
+                run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
+                enemy.name = "trump"
+            } else {
+                enemy = SKSpriteNode(imageNamed: "penguin")
+                run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
+                enemy.name = "enemy"
+            }
         }
 
-        let randomPosition = CGPoint(x: Int.random(in: 64...960), y: -128)
+        let safeAreaLeft = 64
+        let safeAreaRight = Int(UIScreen.main.bounds.width) - safeAreaLeft
+        let hiddenBelowBottom = -128
+        let randomPosition = CGPoint(x: Int.random(in: safeAreaLeft...safeAreaRight), y: hiddenBelowBottom)
+
         enemy.position = randomPosition
 
         let randomAngularVelocity = CGFloat.random(in: -3...3)
@@ -353,7 +376,7 @@ class GameScene: SKScene {
                 if node.position.y < -140 {
                     node.removeAllActions()
 
-                    if node.name == "enemy" {
+                    if node.name == "enemy" || node.name == "trump" {
                         node.name = ""
                         subtractLife()
 
