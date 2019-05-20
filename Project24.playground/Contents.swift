@@ -66,7 +66,7 @@ import UIKit
 //
 //languages.contains(where: input.contains)
 
-// --MARK Part5
+// -- MARK Part5
 //let string = "This is a test string"
 //
 //let attributes: [NSAttributedString.Key: Any] = [
@@ -77,12 +77,61 @@ import UIKit
 //
 //let attributedString = NSAttributedString(string: string, attributes: attributes)
 
-let string = "This is a test string"
-let attributedString = NSMutableAttributedString(string: string)
+// -- MARK Part6
+//let string = "This is a test string"
+//let attributedString = NSMutableAttributedString(string: string)
+//
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 8), range: NSRange(location: 0, length: 4))
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 5, length: 2))
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 8, length: 1))
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 32), range: NSRange(location: 10, length: 4))
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: NSRange(location: 15, length: 6))
 
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 8), range: NSRange(location: 0, length: 4))
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 5, length: 2))
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 8, length: 1))
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 32), range: NSRange(location: 10, length: 4))
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: NSRange(location: 15, length: 6))
+// -- MARK Challenge #1
+extension String {
+    func withPrefix(of prefix: String) -> String {
+        if self.hasPrefix(prefix) {
+            return self
+        } else {
+            return String(prefix + self)
+        }
+    }
+}
 
+let str = "Hello, World"
+print(str.withPrefix(of: "Yo! "))
+
+// -- MARK Challenge #2
+
+extension String {
+    func isNumeric() -> Bool {
+        for char in self {
+            if char.isNumber {
+                return true
+            }
+        }
+        return false
+    }
+}
+
+let str2 = "This is a string."
+let str3 = "This is a string with a numb3r inside."
+str.isNumeric()
+str2.isNumeric()
+str3.isNumeric()
+
+// -- MARK Challenge #3
+
+extension String {
+    var lines: [String] {
+        return self.components(separatedBy: "\n")
+    }
+}
+
+let str4 = """
+Hello
+Everyone
+How
+are you?
+"""
+print(str4.lines)
