@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var imageView: UIImageView!
+
     var currentDrawType = 0
 
     override func viewDidLoad() {
@@ -22,7 +23,7 @@ class ViewController: UIViewController {
     @IBAction func redrawTapped(_ sender: Any) {
 
         currentDrawType += 1
-        if currentDrawType > 5 { currentDrawType = 0 }
+        if currentDrawType > 6 { currentDrawType = 0 }
 
         switch currentDrawType {
         case 0:
@@ -37,6 +38,8 @@ class ViewController: UIViewController {
             drawLines()
         case 5:
             drawImagesAndText()
+        case 6:
+            drawTwin()
         default:
             break
         }
@@ -170,6 +173,56 @@ class ViewController: UIViewController {
 
         }
 
+        imageView.image = image
+    }
+
+    // -- MARK: #2
+    func drawTwin() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+
+        let image = renderer.image { ctx in
+            let context = ctx.cgContext
+            let y = 100
+
+            // T
+            context.move(to: CGPoint(x: 100, y: y))
+            context.addLine(to: CGPoint(x: 130, y: y))
+            context.move(to: CGPoint(x: 115, y: y))
+            context.addLine(to: CGPoint(x: 115, y: y + 30))
+
+            // W
+            context.move(to: CGPoint(x: 140, y: y))
+            context.addLine(to: CGPoint(x: 150, y: y + 30))
+            context.move(to: CGPoint(x: 150, y: y + 30))
+            context.addLine(to: CGPoint(x: 155, y: y + 15))
+            context.move(to: CGPoint(x: 155, y: y + 15))
+            context.addLine(to: CGPoint(x: 160, y: y + 30))
+            context.move(to: CGPoint(x: 160, y: y + 30))
+            context.addLine(to: CGPoint(x: 170, y: y))
+
+            // I
+            context.move(to: CGPoint(x: 180, y: y))
+            context.addLine(to: CGPoint(x: 210, y: y))
+            context.move(to: CGPoint(x: 195, y: y))
+            context.addLine(to: CGPoint(x: 195, y: y + 30))
+            context.move(to: CGPoint(x: 180, y:  y + 30))
+            context.addLine(to: CGPoint(x: 210, y:  y + 30))
+
+            // N
+            context.move(to: CGPoint(x: 220, y: y))
+            context.addLine(to: CGPoint(x: 220, y: y + 30))
+
+            context.move(to: CGPoint(x: 220, y: y))
+            context.addLine(to: CGPoint(x: 250, y: y + 30))
+
+            context.move(to: CGPoint(x: 250, y: y + 30))
+            context.addLine(to: CGPoint(x: 250, y: y))
+
+            // finish
+            context.setStrokeColor(UIColor.black.cgColor)
+            context.strokePath()
+
+        }
         imageView.image = image
     }
 }
