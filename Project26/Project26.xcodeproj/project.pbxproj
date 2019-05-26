@@ -15,6 +15,8 @@
 		1F1E086F229A0F4C006D17F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F1E086E229A0F4C006D17F9 /* Assets.xcassets */; };
 		1F1E0872229A0F4C006D17F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1E0870229A0F4C006D17F9 /* LaunchScreen.storyboard */; };
 		1F1E087A229A104C006D17F9 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F1E0879229A104C006D17F9 /* level1.txt */; };
+		1FBB0C94229A717300434E3A /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FBB0C93229A717300434E3A /* level2.txt */; };
+		1FBB0C96229A725E00434E3A /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FBB0C95229A725D00434E3A /* level3.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		1F1E0871229A0F4C006D17F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F1E0873229A0F4C006D17F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1E0879229A104C006D17F9 /* level1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
+		1FBB0C93229A717300434E3A /* level2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
+		1FBB0C95229A725D00434E3A /* level3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,15 +64,17 @@
 		1F1E0860229A0F4C006D17F9 /* Project26 */ = {
 			isa = PBXGroup;
 			children = (
-				1F1E0861229A0F4C006D17F9 /* AppDelegate.swift */,
-				1F1E0863229A0F4C006D17F9 /* GameScene.sks */,
 				1F1E0867229A0F4C006D17F9 /* GameScene.swift */,
 				1F1E0869229A0F4C006D17F9 /* GameViewController.swift */,
 				1F1E086B229A0F4C006D17F9 /* Main.storyboard */,
 				1F1E086E229A0F4C006D17F9 /* Assets.xcassets */,
+				1F1E0861229A0F4C006D17F9 /* AppDelegate.swift */,
+				1F1E0863229A0F4C006D17F9 /* GameScene.sks */,
 				1F1E0870229A0F4C006D17F9 /* LaunchScreen.storyboard */,
 				1F1E0873229A0F4C006D17F9 /* Info.plist */,
 				1F1E0879229A104C006D17F9 /* level1.txt */,
+				1FBB0C93229A717300434E3A /* level2.txt */,
+				1FBB0C95229A725D00434E3A /* level3.txt */,
 			);
 			path = Project26;
 			sourceTree = "<group>";
@@ -131,8 +137,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBB0C96229A725E00434E3A /* level3.txt in Resources */,
 				1F1E087A229A104C006D17F9 /* level1.txt in Resources */,
 				1F1E086D229A0F4C006D17F9 /* Main.storyboard in Resources */,
+				1FBB0C94229A717300434E3A /* level2.txt in Resources */,
 				1F1E0864229A0F4C006D17F9 /* GameScene.sks in Resources */,
 				1F1E086F229A0F4C006D17F9 /* Assets.xcassets in Resources */,
 				1F1E0872229A0F4C006D17F9 /* LaunchScreen.storyboard in Resources */,
