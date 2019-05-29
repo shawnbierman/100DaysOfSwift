@@ -58,8 +58,8 @@
 		1FEB29F5223E968D005E4DC7 /* Project10 */ = {
 			isa = PBXGroup;
 			children = (
-				1FEB2A08223E97F9005E4DC7 /* PersonCell.swift */,
 				1FEB29F8223E968D005E4DC7 /* ViewController.swift */,
+				1FEB2A08223E97F9005E4DC7 /* PersonCell.swift */,
 				1F6CB7BC223EB61E002A6119 /* Person.swift */,
 				1FEB29F6223E968D005E4DC7 /* AppDelegate.swift */,
 				1FEB29FA223E968D005E4DC7 /* Main.storyboard */,

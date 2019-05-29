@@ -12,6 +12,8 @@
 		1FAF7A76229E033C00A2E71F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FAF7A74229E033C00A2E71F /* Main.storyboard */; };
 		1FAF7A78229E033D00A2E71F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FAF7A77229E033D00A2E71F /* Assets.xcassets */; };
 		1FAF7A7B229E033D00A2E71F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FAF7A79229E033D00A2E71F /* LaunchScreen.storyboard */; };
+		1FFED3AA229F207F0067A30B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFED3A8229F207F0067A30B /* KeychainWrapper.swift */; };
+		1FFED3AB229F207F0067A30B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFED3A9229F207F0067A30B /* KeychainItemAccessibility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		1FAF7A77229E033D00A2E71F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FAF7A7A229E033D00A2E71F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FAF7A7C229E033D00A2E71F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1FFED3A8229F207F0067A30B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainWrapper.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/Developer/shawnbierman/HackingWithSwift/project28-files/KeychainWrapper.swift"; sourceTree = "<group>"; };
+		1FFED3A9229F207F0067A30B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainItemAccessibility.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/Developer/shawnbierman/HackingWithSwift/project28-files/KeychainItemAccessibility.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				1FAF7A77229E033D00A2E71F /* Assets.xcassets */,
 				1FAF7A79229E033D00A2E71F /* LaunchScreen.storyboard */,
 				1FAF7A7C229E033D00A2E71F /* Info.plist */,
+				1FFED3A9229F207F0067A30B /* KeychainItemAccessibility.swift */,
+				1FFED3A8229F207F0067A30B /* KeychainWrapper.swift */,
 			);
 			path = Project28;
 			sourceTree = "<group>";
@@ -135,6 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FFED3AA229F207F0067A30B /* KeychainWrapper.swift in Sources */,
+				1FFED3AB229F207F0067A30B /* KeychainItemAccessibility.swift in Sources */,
 				1FAF7A73229E033C00A2E71F /* ViewController.swift in Sources */,
 				1FAF7A71229E033C00A2E71F /* AppDelegate.swift in Sources */,
 			);
