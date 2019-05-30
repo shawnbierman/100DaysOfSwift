@@ -15,6 +15,8 @@
 		1F5D7F19229F5EE000401E16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5D7F18229F5EE000401E16 /* Assets.xcassets */; };
 		1F5D7F1C229F5EE000401E16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5D7F1A229F5EE000401E16 /* LaunchScreen.storyboard */; };
 		1F5D7F24229F5F5F00401E16 /* BuildingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5D7F23229F5F5F00401E16 /* BuildingNode.swift */; };
+		1F5D7F2722A015CF00401E16 /* hitBuilding.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5D7F2522A015CF00401E16 /* hitBuilding.sks */; };
+		1F5D7F2822A015CF00401E16 /* hitPlayer.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5D7F2622A015CF00401E16 /* hitPlayer.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		1F5D7F1B229F5EE000401E16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F5D7F1D229F5EE000401E16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F5D7F23229F5F5F00401E16 /* BuildingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingNode.swift; sourceTree = "<group>"; };
+		1F5D7F2522A015CF00401E16 /* hitBuilding.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitBuilding.sks; sourceTree = "<group>"; };
+		1F5D7F2622A015CF00401E16 /* hitPlayer.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitPlayer.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,15 +64,17 @@
 		1F5D7F0A229F5EDF00401E16 /* Project29 */ = {
 			isa = PBXGroup;
 			children = (
-				1F5D7F0B229F5EDF00401E16 /* AppDelegate.swift */,
-				1F5D7F0D229F5EDF00401E16 /* GameScene.sks */,
 				1F5D7F11229F5EDF00401E16 /* GameScene.swift */,
 				1F5D7F13229F5EDF00401E16 /* GameViewController.swift */,
 				1F5D7F23229F5F5F00401E16 /* BuildingNode.swift */,
-				1F5D7F15229F5EDF00401E16 /* Main.storyboard */,
 				1F5D7F18229F5EE000401E16 /* Assets.xcassets */,
+				1F5D7F15229F5EDF00401E16 /* Main.storyboard */,
 				1F5D7F1A229F5EE000401E16 /* LaunchScreen.storyboard */,
 				1F5D7F1D229F5EE000401E16 /* Info.plist */,
+				1F5D7F0B229F5EDF00401E16 /* AppDelegate.swift */,
+				1F5D7F0D229F5EDF00401E16 /* GameScene.sks */,
+				1F5D7F2522A015CF00401E16 /* hitBuilding.sks */,
+				1F5D7F2622A015CF00401E16 /* hitPlayer.sks */,
 			);
 			path = Project29;
 			sourceTree = "<group>";
@@ -83,6 +89,7 @@
 				1F5D7F04229F5EDF00401E16 /* Sources */,
 				1F5D7F05229F5EDF00401E16 /* Frameworks */,
 				1F5D7F06229F5EDF00401E16 /* Resources */,
+				1F5D7F2922A032F500401E16 /* Swift Linter */,
 			);
 			buildRules = (
 			);
@@ -132,6 +139,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F5D7F17229F5EDF00401E16 /* Main.storyboard in Resources */,
+				1F5D7F2722A015CF00401E16 /* hitBuilding.sks in Resources */,
+				1F5D7F2822A015CF00401E16 /* hitPlayer.sks in Resources */,
 				1F5D7F0E229F5EDF00401E16 /* GameScene.sks in Resources */,
 				1F5D7F19229F5EE000401E16 /* Assets.xcassets in Resources */,
 				1F5D7F1C229F5EE000401E16 /* LaunchScreen.storyboard in Resources */,
@@ -139,6 +148,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F5D7F2922A032F500401E16 /* Swift Linter */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Linter";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F5D7F04229F5EDF00401E16 /* Sources */ = {
