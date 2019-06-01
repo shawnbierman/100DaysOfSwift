@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F5CC72B22A1BAB700FBB3EE /* Extension+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CC72A22A1BAB700FBB3EE /* Extension+UIImageView.swift */; };
 		5138B3BD1D69197400FD2417 /* BRB-Large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5138B38D1D69197400FD2417 /* BRB-Large.jpg */; };
 		5138B3BE1D69197400FD2417 /* BRB-Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5138B38E1D69197400FD2417 /* BRB-Thumb.jpg */; };
 		5138B3BF1D69197400FD2417 /* BRB-Thumb@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5138B38F1D69197400FD2417 /* BRB-Thumb@2x.jpg */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F5CC72A22A1BAB700FBB3EE /* Extension+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImageView.swift"; sourceTree = "<group>"; };
 		5138B38D1D69197400FD2417 /* BRB-Large.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BRB-Large.jpg"; sourceTree = "<group>"; };
 		5138B38E1D69197400FD2417 /* BRB-Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BRB-Thumb.jpg"; sourceTree = "<group>"; };
 		5138B38F1D69197400FD2417 /* BRB-Thumb@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BRB-Thumb@2x.jpg"; sourceTree = "<group>"; };
@@ -150,9 +152,10 @@
 		51BE9E5B1A2667CD00578AA0 /* Project30 */ = {
 			isa = PBXGroup;
 			children = (
-				51BE9E5E1A2667CD00578AA0 /* AppDelegate.swift */,
 				51BE9E7E1A26680100578AA0 /* SelectionViewController.swift */,
 				51BE9E801A266A3800578AA0 /* ImageViewController.swift */,
+				1F5CC72A22A1BAB700FBB3EE /* Extension+UIImageView.swift */,
+				51BE9E5E1A2667CD00578AA0 /* AppDelegate.swift */,
 				51BE9E651A2667CD00578AA0 /* Images.xcassets */,
 				51BE9E671A2667CD00578AA0 /* LaunchScreen.xib */,
 				51BE9E5C1A2667CD00578AA0 /* Supporting Files */,
@@ -234,6 +237,7 @@
 				51BE9E551A2667CD00578AA0 /* Sources */,
 				51BE9E561A2667CD00578AA0 /* Frameworks */,
 				51BE9E571A2667CD00578AA0 /* Resources */,
+				1F5CC72922A199F800FBB3EE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -258,16 +262,15 @@
 					51BE9E581A2667CD00578AA0 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = TQPTGGXQ34;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
 			buildConfigurationList = 51BE9E541A2667CD00578AA0 /* Build configuration list for PBXProject "Project30" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -341,11 +344,32 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1F5CC72922A199F800FBB3EE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		51BE9E551A2667CD00578AA0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F5CC72B22A1BAB700FBB3EE /* Extension+UIImageView.swift in Sources */,
 				51BE9E7F1A26680100578AA0 /* SelectionViewController.swift in Sources */,
 				51BE9E811A266A3800578AA0 /* ImageViewController.swift in Sources */,
 				51BE9E5F1A2667CD00578AA0 /* AppDelegate.swift in Sources */,
@@ -476,8 +500,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackingwithswift.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -490,8 +513,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackingwithswift.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
