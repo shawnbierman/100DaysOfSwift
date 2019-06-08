@@ -10,11 +10,6 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
 
-    let container: UIView = {
-        let view = UIView()
-        return view
-    }()
-
     let frontImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -23,7 +18,6 @@ class CollectionViewCell: UICollectionViewCell {
 
     let backImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "Earth")
         iv.contentMode = .scaleAspectFit
         return iv
     }()
@@ -31,25 +25,15 @@ class CollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        [container].forEach { addSubview( $0 ) }
-        [backImageView, frontImageView].forEach { container.addSubview( $0 ) }
+        self.backgroundColor = .clear
 
-        container.fillSuperview()
+        [backImageView, frontImageView].forEach { addSubview( $0 ) }
+
         backImageView.fillSuperview()
         frontImageView.fillSuperview()
 
         frontImageView.isHidden = true
         backImageView.isHidden = false
 
-        self.shadow()
-    }
-
-    func shadow() {
-        self.layer.backgroundColor = UIColor.white.cgColor
-        self.layer.shadowColor = UIColor.gray.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
-        self.layer.shadowRadius = 4.0
-        self.layer.shadowOpacity = 1.0
-        self.layer.masksToBounds = false
     }
 }

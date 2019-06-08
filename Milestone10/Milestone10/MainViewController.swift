@@ -10,47 +10,118 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class MainViewController: UICollectionViewController {
+class MainViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var items = [URL]()
+    @IBOutlet var collectionBackground: UIImageView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var cards = [URL]()
 
-        collectionView.backgroundColor = UIColor(white: 0.92, alpha: 1)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadGame))
-        
-        findFlags()
-    }
-
-    fileprivate func findFlags() {
-        let paths = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: "Flags.bundle")
-
-        if let paths = paths {
-            items += paths
-            items.removeSubrange(8...items.count - 1)
-            items += items
-            items.shuffle()
+    var selectedCards = [Card]() {
+        didSet {
+            if self.selectedCards.count == 2 {
+                compareCards(self.selectedCards)
+            }
         }
     }
 
-    @objc fileprivate func reloadGame() {
-        print("reloading game...")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionBackground.image = #imageLiteral(resourceName: "EarthBackground")
+        findFlags()
+    }
+
+    override var prefersStatusBarHidden: Bool { return true }
+
+    fileprivate func findFlags() {
+        if let paths = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: "Flags.bundle") {
+            cards += paths
+            cards.shuffle()
+            cards.removeSubrange(6...cards.count - 1)
+            cards += cards
+            cards.shuffle()
+        }
+    }
+
+    @IBAction func newGame(_ sender: Any) {
+        cards.removeAll(keepingCapacity: true)
+        selectedCards.removeAll(keepingCapacity: true)
+        findFlags()
+        collectionView.reloadData()
+    }
+
+    fileprivate func compareCards(_ cards: [Card]) {
+
+        guard let first = cards.first?.name else { return }
+        guard let last = cards.last?.name else { return }
+
+        if first == last {
+            selectedCards.removeAll(keepingCapacity: true)
+
+            cards.forEach { [weak self] card in
+                if let cell = self?.collectionView.cellForItem(at: card.indexPath) as? CollectionViewCell {
+
+                    UIView.animate(withDuration: 0.3, animations:  {
+                        cell.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                    }) { finished in
+
+                        UIView.animate(withDuration: 0.5, animations: {
+                            cell.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+                        })
+                    }
+                }
+            }
+        } else {
+            selectedCards.removeAll(keepingCapacity: true)
+
+            cards.forEach { (card) in
+                if let cell = collectionView.cellForItem(at: card.indexPath) as? CollectionViewCell {
+
+                    // add a delay here because you won't see the card before it flips
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                        UIView.transition(from: cell.frontImageView, to: cell.backImageView, duration: 0.4, options: .transitionFlipFromLeft, completion: nil)
+                        cell.backImageView.isHidden = false
+                        cell.frontImageView.isHidden = true
+                    })
+                }
+            }
+        }
     }
 }
 
-// MARK: - Navigation
+// MARK: - UICollectionViewDelegate
 extension MainViewController {
 
-    /*
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell else { return }
 
+        if cell.frontImageView.isHidden {
+
+            let url = cards[indexPath.item]
+            let image = UIImage(contentsOfFile: url.path)
+            let filename = url.lastPathComponent
+
+            UIView.transition(from: cell.backImageView,
+                              to: cell.frontImageView,
+                              duration: 0.2,
+                              options: .transitionFlipFromRight,
+                              completion: { [weak self] _ in
+
+                                cell.backImageView.isHidden = true
+                                cell.frontImageView.isHidden = false
+                                cell.frontImageView.image = image
+
+                                self?.selectedCards.append(Card(name: filename, indexPath: indexPath))
+            })
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let padding: CGFloat = 440
+        let size = (UIScreen.main.bounds.width - padding) / 3.5
+        return CGSize(width: size, height: size)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -61,48 +132,36 @@ extension MainViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return cards.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CollectionViewCell else {
-            fatalError("Unable to dequeue a CollectionViewCell")
-        }
-        return cell
-    }
-}
 
-// MARK: - UICollectionViewDelegate
-extension MainViewController {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CollectionViewCell
+            else { fatalError("Unable to dequeue a CollectionViewCell") }
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        cell.transform = .identity
+        cell.isHidden = false
 
-        let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        if cell.frontImageView.isHidden {
+        cell.backImageView.isHidden = false
+        cell.frontImageView.isHidden = true
+        cell.backImageView.image = #imageLiteral(resourceName: "Earth")
 
-            // the backImageView is showing now
-            // hide it
-            // show frontImageView
-
-            let image = UIImage(contentsOfFile: items[indexPath.item].path)
-            cell.backImageView.isHidden = true
-            cell.frontImageView.isHidden = false
-            cell.frontImageView.image = image
-
-            UIView.transition(from: cell.backImageView, to: cell.frontImageView,
-                              duration: 0.2, options: .transitionFlipFromRight, completion: nil)
+        if cell.isHidden {
+            print("cell is hidden")
+            cell.isHidden = false
         } else {
-
-            // the frontImageView is show now
-            // hide it
-            // show backImageView
-
-            cell.backImageView.image = #imageLiteral(resourceName: "Earth")
-            cell.frontImageView.isHidden = true
-            cell.backImageView.isHidden = false
-
-            UIView.transition(from: cell.frontImageView, to: cell.backImageView,
-                              duration: 0.1,  options: .transitionFlipFromLeft, completion: nil)
+            print("cell is visible")
         }
+
+        print("isHidden: \(cell.isHidden)")
+        print("alpha: \(cell.alpha)")
+        print("transform: \(cell.transform)")
+        print("backImageView.isHidden: \(cell.backImageView.isHidden)")
+        print("frontImageView.isHidden: \(cell.frontImageView.isHidden)")
+        print("backImageView.image: \(String(describing: cell.backImageView.image))")
+
+        print("---")
+        return cell
     }
 }
