@@ -26,7 +26,9 @@ class MainViewController: UICollectionViewController, UICollectionViewDelegateFl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         collectionBackground.image = #imageLiteral(resourceName: "EarthBackground")
+
         findFlags()
     }
 
@@ -40,13 +42,6 @@ class MainViewController: UICollectionViewController, UICollectionViewDelegateFl
             cards += cards
             cards.shuffle()
         }
-    }
-
-    @IBAction func newGame(_ sender: Any) {
-        cards.removeAll(keepingCapacity: true)
-        selectedCards.removeAll(keepingCapacity: true)
-        findFlags()
-        collectionView.reloadData()
     }
 
     fileprivate func compareCards(_ cards: [Card]) {
@@ -74,10 +69,10 @@ class MainViewController: UICollectionViewController, UICollectionViewDelegateFl
             selectedCards.removeAll(keepingCapacity: true)
 
             cards.forEach { (card) in
-                if let cell = collectionView.cellForItem(at: card.indexPath) as? CollectionViewCell {
 
-                    // add a delay here because you won't see the card before it flips
+                if let cell = collectionView.cellForItem(at: card.indexPath) as? CollectionViewCell {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+
                         UIView.transition(from: cell.frontImageView, to: cell.backImageView, duration: 0.4, options: .transitionFlipFromLeft, completion: nil)
                         cell.backImageView.isHidden = false
                         cell.frontImageView.isHidden = true
